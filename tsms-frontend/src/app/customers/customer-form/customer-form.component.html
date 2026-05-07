@@ -1,0 +1,102 @@
+<h2 mat-dialog-title>{{isEdit ? 'Edit' : 'Add'}} Customer</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Customer Name</mat-label>
+      <input matInput formControlName="customerName" required>
+      <mat-error *ngIf="form.get('customerName')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contact Person</mat-label>
+      <input matInput formControlName="contactPerson">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mobile No.</mat-label>
+      <input matInput formControlName="mobileNo" required>
+      <mat-error *ngIf="form.get('mobileNo')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Alternative Mobile</mat-label>
+      <input matInput formControlName="alternativeMobNo">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email ID</mat-label>
+      <input matInput formControlName="emailId" type="email">
+      <mat-error *ngIf="form.get('emailId')?.hasError('email')">Invalid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="address" rows="3"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nearest Landmark</mat-label>
+      <input matInput formControlName="nearestLandmark">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Distance (km)</mat-label>
+      <input matInput formControlName="distance" type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Branch</mat-label>
+      <mat-select formControlName="branchId">
+        <mat-option *ngFor="let branch of branches" [value]="branch.id">{{branch.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Equipment Details Section -->
+    <div class="full-width equipment-section">
+      <mat-divider></mat-divider>
+      <h3>Equipment Details</h3>
+      
+      <div formArrayName="equipmentDetails">
+        <div *ngFor="let equipment of equipmentDetails.controls; let i = index" 
+             [formGroupName]="i" 
+             class="equipment-row">
+          <mat-form-field appearance="outline" class="equipment-name">
+            <mat-label>Equipment Name</mat-label>
+            <input matInput formControlName="equipmentName" placeholder="e.g., Computers">
+            <mat-error *ngIf="equipment.get('equipmentName')?.hasError('required')">Required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="equipment-quantity">
+            <mat-label>Quantity</mat-label>
+            <input matInput formControlName="quantity" type="number" min="1">
+            <mat-error *ngIf="equipment.get('quantity')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="equipment.get('quantity')?.hasError('min')">Must be at least 1</mat-error>
+          </mat-form-field>
+
+          <button mat-icon-button color="warn" type="button" (click)="removeEquipment(i)" class="remove-btn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <button mat-stroked-button color="primary" type="button" (click)="addEquipment()" class="add-equipment-btn">
+        <mat-icon>add</mat-icon> Add Equipment
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">
+    {{isEdit ? 'Update' : 'Save'}}
+  </button>
+</mat-dialog-actions>

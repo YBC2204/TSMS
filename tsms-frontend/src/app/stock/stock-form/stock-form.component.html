@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{isEdit ? 'Edit' : 'Add'}} Stock Item</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Stock Item</mat-label>
+      <input matInput formControlName="stockItem" required>
+      <mat-error *ngIf="form.get('stockItem')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Brand</mat-label>
+      <mat-select formControlName="brandId">
+        <mat-option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>SI Number</mat-label>
+      <input matInput formControlName="siNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let s of statusOptions" [value]="s">{{s}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">
+    {{isEdit ? 'Update' : 'Save'}}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{isEdit ? 'Edit' : 'Add'}} Employee</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form-grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Employee Name</mat-label>
+      <input matInput formControlName="empName" required>
+      <mat-error *ngIf="form.get('empName')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mobile No.</mat-label>
+      <input matInput formControlName="mobileNo" required>
+      <mat-error *ngIf="form.get('mobileNo')?.hasError('required')">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Job Position</mat-label>
+      <mat-select formControlName="jobPositionId">
+        <mat-option *ngFor="let pos of jobPositions" [value]="pos.id">{{pos.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Date of Joining</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="doj">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Residential Address</mat-label>
+      <textarea matInput formControlName="resAddr" rows="3"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">
+    {{isEdit ? 'Update' : 'Save'}}
+  </button>
+</mat-dialog-actions>

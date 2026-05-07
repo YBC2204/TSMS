@@ -1,0 +1,51 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.equipment-section {
+  margin-top: 16px;
+  
+  h3 {
+    margin: 16px 0 8px 0;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  mat-divider {
+    margin-bottom: 16px;
+  }
+
+  .equipment-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+
+    .equipment-name {
+      flex: 2;
+    }
+
+    .equipment-quantity {
+      flex: 1;
+    }
+
+    .remove-btn {
+      margin-top: 6px;
+    }
+  }
+
+  .add-equipment-btn {
+    margin-top: 8px;
+  }
+}

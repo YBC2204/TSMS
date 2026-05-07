@@ -1,0 +1,56 @@
+.container {
+  padding: 20px;
+  max-width: 800px;
+
+  h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+}
+
+.type-selector {
+  margin-bottom: 10px;
+
+  mat-form-field {
+    min-width: 300px;
+  }
+}
+
+.add-section {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  .add-input {
+    flex: 1;
+  }
+
+  button {
+    height: 56px;
+  }
+}
+
+.lookup-list {
+  border-radius: 8px;
+  overflow: hidden;
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    font-weight: 600;
+    color: #555;
+  }
+
+  .inline-edit {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.no-data {
+  text-align: center;
+  padding: 30px;
+  color: #888;
+}

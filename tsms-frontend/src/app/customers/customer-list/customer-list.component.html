@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="header">
+    <h2>Customer Management</h2>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      <mat-icon aria-hidden="false" >add</mat-icon>
+Add Customer
+    </button>
+  </div>
+
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search customers</mat-label>
+    <input matInput [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Search by name, email, contact...">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="table-container mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="customerId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{row.customerId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="customerName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer Name</th>
+        <td mat-cell *matCellDef="let row">{{row.customerName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="contactPerson">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Person</th>
+        <td mat-cell *matCellDef="let row">{{row.contactPerson}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="mobileNo">
+        <th mat-header-cell *matHeaderCellDef>Mobile No.</th>
+        <td mat-cell *matCellDef="let row">{{row.mobileNo}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="emailId">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let row">{{row.emailId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+        <td mat-cell *matCellDef="let row">{{row.category?.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="distance">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Distance</th>
+        <td mat-cell *matCellDef="let row">{{row.distance}} km</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" matTooltip="Edit" (click)="openForm(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteCustomer(row.customerId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8" style="text-align: center; padding: 20px;">
+          No customers found
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

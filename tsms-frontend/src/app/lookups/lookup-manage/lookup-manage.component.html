@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>Manage Lookup Values</h2>
+
+  <div class="type-selector">
+    <mat-form-field appearance="outline">
+      <mat-label>Lookup Type</mat-label>
+      <mat-select [(value)]="selectedType" (selectionChange)="onTypeChange()">
+        <mat-option *ngFor="let type of lookupTypes" [value]="type.value">
+          {{type.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="add-section">
+    <mat-form-field appearance="outline" class="add-input">
+      <mat-label>New Value</mat-label>
+      <input matInput [(ngModel)]="newLookupName" (keyup.enter)="addLookup()" [placeholder]="getPlaceholder()">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addLookup()" [disabled]="!newLookupName.trim()">
+      <mat-icon>add</mat-icon> Add
+    </button>
+  </div>
+
+  <div class="lookup-list mat-elevation-z2">
+    <table mat-table [dataSource]="lookups">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row; let i = index">{{i + 1}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">
+          <span *ngIf="editingId !== row.id">{{row.name}}</span>
+          <mat-form-field *ngIf="editingId === row.id" appearance="outline" class="inline-edit">
+            <input matInput [(ngModel)]="editingName">
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef>Active</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-slide-toggle [checked]="row.isActive" (change)="toggleActive(row)"></mat-slide-toggle>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngIf="editingId !== row.id">
+            <button mat-icon-button color="primary" matTooltip="Edit" (click)="startEdit(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteLookup(row.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editingId === row.id">
+            <button mat-icon-button color="primary" matTooltip="Save" (click)="saveEdit(row)">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Cancel" (click)="cancelEdit()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['id', 'name', 'active', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'active', 'actions'];"></tr>
+    </table>
+
+    <div *ngIf="lookups.length === 0" class="no-data">
+      No lookup values found for this type. Add one above.
+    </div>
+  </div>
+</div>

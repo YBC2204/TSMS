@@ -1,28 +1,109 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
+# =====================
+# OS generated files
+# =====================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
 
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
+# =====================
+# IDE / Editor files
+# =====================
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.swp
+*.swo
+*~
 
-# Environment files
-/.env
+# =====================
+# Java / Maven (Backend)
+# =====================
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.rar
+*.zip
+*.tar.gz
+*.log
+hs_err_pid*
+replay_pid*
 
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+# Spring Boot
+*.pid
+application-*.properties
+!application.properties
+application-*.yml
+!application.yml
 
-# TypeScript cache
+# =====================
+# Angular / Node (Frontend)
+# =====================
+**/node_modules/
+**/dist/
+**/out-tsc/
+**/tmp/
+**/.angular/
+**/coverage/
+**/e2e/test-output/
 *.tsbuildinfo
+.sass-cache/
+/connect.lock
+/libpeerconnection.log
+testem.log
+/typings
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# Lock files (optional — uncomment if you want to track them)
+# package-lock.json
+# yarn.lock
+
+# =====================
+# Environment / Secrets
+# =====================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+
+# =====================
+# Build / Compiled output
+# =====================
+/build/
+/out/
+*.com
+*.exe
+*.o
+*.so
+*.dll

@@ -1,0 +1,56 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0;
+    color: #333;
+  }
+}
+
+.search-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.table-container {
+  border-radius: 8px;
+  overflow: hidden;
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    font-weight: 600;
+    color: #555;
+  }
+}
+
+.status-chip {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &.available {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.in_use, &.in-use {
+    background-color: #fff3e0;
+    color: #ef6c00;
+  }
+
+  &.damaged {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+}
